@@ -15,7 +15,6 @@ class TodoBody extends Component {
             .then(res => res.json())
             .then((result) => {
                 this.setState({ todos:result.todos });
-                console.log(result.todos);
             })
     }
 
