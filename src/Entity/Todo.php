@@ -51,7 +51,7 @@ class Todo
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -63,7 +63,7 @@ class Todo
         return $this;
     }
 
-    public function getPriority(): ?int
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -75,7 +75,7 @@ class Todo
         return $this;
     }
 
-    public function getDueDate(): ?\DateTimeInterface
+    public function getDueDate(): \DateTimeInterface
     {
         return $this->dueDate;
     }
@@ -87,19 +87,19 @@ class Todo
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getRegDate(): ?\DateTimeInterface
+    public function getRegDate(): \DateTimeInterface
     {
         return $this->reg_date;
     }
@@ -111,7 +111,7 @@ class Todo
         return $this;
     }
 
-    public function getDone(): ?bool
+    public function getDone(): bool
     {
         return $this->done;
     }

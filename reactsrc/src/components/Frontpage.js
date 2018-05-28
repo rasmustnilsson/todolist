@@ -7,7 +7,7 @@ class Frontpage extends Component {
     render() {
         return(
             <div>
-                <Header text="Latest Todos" />
+                <Header>Latest Todos</Header>
                 <table className="table table-hover">
                     <thead>
                         <tr>

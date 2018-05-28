@@ -5,7 +5,7 @@ class Frontpage extends Component {
     render() {
         return(
             <div>
-            <Header text="Create Todo" />
+            <Header>Create Todo</Header>
             <form action="/createtodo" method="post">
                 <div className="form-group">
                     <label htmlFor="name">Todo</label>
@@ -29,8 +29,8 @@ class Frontpage extends Component {
                     <small className="form-text text-muted">What's it about?</small>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="dueDate">Example textarea</label>
-                    <input type="date" name="dueDate" className="form-control" defaultValue="2011-09-29"/>
+                    <label htmlFor="dueDate">Due date</label>
+                    <input type="date" name="dueDate" className="form-control" defaultValue={new Date().toISOString().substr(0, 10)}/>
                 </div>
                 <button type="submit" className="btn btn-primary">Create todo</button>
             </form>

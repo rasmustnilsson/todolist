@@ -16,6 +16,7 @@ class TodoController extends Controller
     private function serializeTodo(Todo $todo)
     {
         return array(
+            'id' => $todo->getId(),
             'name' => $todo->getName(),
             'priority' => $todo->getPriority(),
             'description' => $todo->getDescription(),
@@ -25,6 +26,26 @@ class TodoController extends Controller
         );
     }
 
+    /**
+     * @Route("/edittodo/{id}", name="editTodo")
+     * @Method("POST")
+     */
+    public function editTodo(Request $request, $id = null) {
+        $put_str = $request->getContent();
+        parse_str($put_str, $_PUT);
+        $entityManager = $this->getDoctrine()->getManager();
+        $todo = $entityManager->getRepository(Todo::class)->find($id);
+
+        $todo->setName($_PUT['name']);
+        $todo->setPriority($_PUT['priority']);
+        $todo->setDescription($_PUT['description']);
+        $todo->setDueDate(\DateTime::createFromFormat('Y-m-d', $_PUT['dueDate']));
+        $todo->setRegDate(\DateTime::createFromFormat('Y-m-d', "2018-09-09"));
+        $todo->setDone(false);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+    }
 
     /**
      * @Route("/createtodo", name="createTodo")
@@ -35,7 +56,6 @@ class TodoController extends Controller
 
         $put_str = $request->getContent();
         parse_str($put_str, $_PUT);
-        //return new Response($_PUT['dueDate']);
 
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -72,12 +92,40 @@ class TodoController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/gettodo/{id}", name="getTodo")
+     */
+    public function getTodo(Request $request, $id)
+    {
+        $todos = $this->getDoctrine()
+            ->getRepository(Todo::class)
+            ->find($id);
+        return $this->json($todos);
+    }
+
+    /**
+     * @Route("/deletetodo/{id}", name="removeTodo")
+     */
+    public function deleteTodo(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $todo = $this->getDoctrine()
+            ->getRepository(Todo::class)
+            ->find($id);
+
+        $entityManager->remove($todo);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
 
     /**
      * @Route("/", name="home")
      * @Route("/{slug}", name="home2")
+     * @Route("/{slug}/{slug2}", name="home3")
      */
-    public function indexAction(Request $request, $slug = null)
+    public function indexAction(Request $request)
     {
         return $this->render('default/index.html.twig');
 

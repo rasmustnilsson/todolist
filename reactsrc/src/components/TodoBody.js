@@ -23,11 +23,13 @@ class TodoBody extends Component {
         return (
             <tbody>
             {this.state.todos.map(function(todo, i){
+                i = i + 1;
                 return <Todo index={i} key={i}
                     name={todo.name}
                     priority={todo.priority}
                     description={todo.description}
                     dueDate={todo.dueDate.date}
+                    id={todo.id}
                 />;
             })}
             </tbody>
