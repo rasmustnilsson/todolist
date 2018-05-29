@@ -10,7 +10,7 @@ class TodoBody extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         fetch("/gettodos")
             .then(res => res.json())
             .then((result) => {

@@ -22,7 +22,7 @@ class Todo extends Component {
                 <td>{this.props.description}</td>
                 <td><div className={"circle " + this.getPriorityClass()}></div></td>
                 <td><Moment format="YYYY/MM/DD">{this.props.dueDate}</Moment></td>
-                <td><a className="btn btn-success mr-1" role="button" href={"/viewtodo/" + this.props.id}>View  </a>
+                <td><a className="btn btn-success mr-1" role="button" href={"/viewtodo/" + this.props.id}>View</a>
                 <a className="btn btn-primary mr-1" role="button" href={"/edittodo/" + this.props.id }>Edit</a>
                 <a className="btn btn-danger mr-1" role="button" href={"/deletetodo/" + this.props.id}>Delete</a></td>
             </tr>

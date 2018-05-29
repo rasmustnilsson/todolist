@@ -20,7 +20,7 @@ class Radiobutton extends Component {
     render() {
         return (
             <div className="form-check form-check-inline">
-                <input className="form-check-input d-none" type="radio" onChange={this.handleChange} name="priority" id={"priority"+this.props.value} value={this.props.value}/>
+                <input className="form-check-input d-none" type="radio" onChange={this.handleChange} name="priority" id={"priority"+this.props.value} value={this.props.value} defaultChecked={this.props.value == 1}/>
                 <label className={this.props.colorClass + " form-check-label priority_box" + this.isSelected()} htmlFor={"priority"+this.props.value}>{this.props.text}</label>
             </div>
         );

@@ -17,7 +17,19 @@ class ViewTodo extends Component {
            }
         };
     }
-    componentDidMount() {
+
+    getPriorityClass() {
+        switch(this.state.todo.priority) {
+            case 1:
+                return "bg-success"
+            case 2:
+                return "bg-warning"
+            case 3:
+                return "bg-danger"
+        }
+    }
+
+    componentWillMount() {
         fetch("/gettodo/"+this.props.match.params.id)
             .then(res => res.json())
             .then((result) => {
@@ -32,12 +44,12 @@ class ViewTodo extends Component {
                 <h4>Description</h4>
                 <p>{this.state.todo.description}</p>
                 <h4>Priority</h4>
-                <p>{this.state.todo.priority}</p>
+                <p className={"priority_box " + this.getPriorityClass()}></p>
                 <h4>Due Date</h4>
                 <p><Moment format="YYYY/MM/DD">{this.state.todo.dueDate}</Moment></p>
                 <h4>Created</h4>
                 <p><Moment format="YYYY/MM/DD">{this.state.todo.reg_date}</Moment></p>
-                <a class="btn btn-primary" href={"/edittodo/"+this.props.match.params.id} role="button">Edit</a>
+                <a className="btn btn-primary" href={"/edittodo/"+this.props.match.params.id} role="button">Edit</a>
             </div>
         );
     }

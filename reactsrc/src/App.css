@@ -1,6 +1,7 @@
 .priority_box {
     height: 1.5rem;
     width: 3.5rem;
+    border-radius: 0.20rem;
 }
 
 label.active {
@@ -9,7 +10,6 @@ label.active {
 .circle {
     height: 1.2rem;
     width: 1.2rem;
-    background-color: #bbb;
     border-radius: 50%;
     margin: 0 auto;
 }
