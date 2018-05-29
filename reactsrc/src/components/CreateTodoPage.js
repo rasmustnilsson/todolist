@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
+import Radiobutton from './Radiobutton.js';
 
 class Frontpage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            prioritySelected: 1,
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({prioritySelected: e.currentTarget.value});
+    }
+
     render() {
         return(
             <div>
@@ -13,14 +27,10 @@ class Frontpage extends Component {
                     <small className="form-text text-muted">What's the activity?</small>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="priority">Priority</label>
-                    <select className="form-control" name="priority">
-                        <option defaultValue>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    <p className="mb-1">Priority</p>
+                    <Radiobutton value="1" onChange={this.handleChange} colorClass="bg-success" prioritySelected={this.state.prioritySelected}/>
+                    <Radiobutton value="2" onChange={this.handleChange} colorClass="bg-warning" prioritySelected={this.state.prioritySelected} />
+                    <Radiobutton value="3" onChange={this.handleChange} colorClass="bg-danger" prioritySelected={this.state.prioritySelected} />
                     <small className="form-text text-muted">How important is it?</small>
                 </div>
                 <div className="form-group">

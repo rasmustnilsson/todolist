@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
+import Radiobutton from './Radiobutton.js';
 
 class Frontpage extends Component {
 
@@ -14,6 +15,13 @@ class Frontpage extends Component {
                 reg_date: null,
             }
         }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        const temp = this.state.todo;
+        temp.priority = e.currentTarget.value;
+        this.setState({todo: temp});
     }
 
     componentDidMount() {
@@ -22,7 +30,7 @@ class Frontpage extends Component {
             .then((result) => {
                 this.setState({ todo:result });
                 document.getElementById('todoName').value = result.name;
-                document.getElementById('todoPriority').value=result.priority;
+                document.getElementsByName('priority').value=result.priority;
                 document.getElementById('todoDescription').value=result.description;
                 const d = new Date(result.dueDate);
                 this.state.todo.dueDate = d.getFullYear()+'-' + ("0" + (d.getMonth()+1)).slice(-2) + '-'+d.getDate();
@@ -42,14 +50,10 @@ class Frontpage extends Component {
                     <small className="form-text text-muted">What's the activity?</small>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="priority">Priority</label>
-                    <select className="form-control" id="todoPriority" name="priority">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    <p className="mb-1">Priority</p>
+                    <Radiobutton value="1" onChange={this.handleChange} colorClass="bg-success" prioritySelected={this.state.todo.priority} />
+                    <Radiobutton value="2" onChange={this.handleChange} colorClass="bg-warning" prioritySelected={this.state.todo.priority} />
+                    <Radiobutton value="3" onChange={this.handleChange} colorClass="bg-danger" prioritySelected={this.state.todo.priority} />
                     <small className="form-text text-muted">How important is it?</small>
                 </div>
                 <div className="form-group">
